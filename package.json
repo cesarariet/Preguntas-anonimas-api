@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "set DEBUG=app:* && set NODE_ENV=development && nodemon index",
-    "start": "set NODE_ENV=production && node index"
+    "start": "node index"
   },
   "author": "Mario Estanislao Cesar Ariet <mestanislaoca@gmail.com>",
   "license": "ISC",
