@@ -18,9 +18,10 @@ function moviesApi(app) {
 
   router.get('/', async function (req, res, next) {
     cacheResponse(res, 300);
-    const { tags } = req.query;
+    const tags = req.query;
+
     try {
-      const asks = await asksService.getAsks({ tags });
+      const asks = await asksService.getAsks(tags);
       res.status(200).json({
         data: asks,
         message: 'Asks listed',
@@ -30,26 +31,19 @@ function moviesApi(app) {
     }
   });
 
+  router.post('/', async function (req, res, next) {
+    const { body: ask } = req;
 
-  router.post(
-    '/',
-    async function (req, res, next) {
-      const { body: ask } = req;
-
-      console.log({ ask });
-
-      try {
-        const createdAskId = await asksService.createAsk({ ask });
-        res.status(201).json({
-          data: createdAskId,
-          message: 'Ask created',
-        });
-      } catch (error) {
-        next(error);
-      }
+    try {
+      const createdAskId = await asksService.createAsk({ ask });
+      res.status(201).json({
+        data: createdAskId,
+        message: 'Ask created',
+      });
+    } catch (error) {
+      next(error);
     }
-  );
-
+  });
 }
 
 module.exports = moviesApi;
