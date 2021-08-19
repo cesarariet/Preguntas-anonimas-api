@@ -8,9 +8,9 @@ class AsksService {
   }
   async getAsks(tags) {
     let query;
-    if (tags.course) query = { course: parseInt(tags.course) };
+    if (tags.course) query = { course: tags.course };
     if (tags.pending) query = { ...query, pending: tags.pending === 'true' };
-    if (tags.courseId) query = { ...query, courseId: parseInt(tags.courseId) };
+    if (tags.courseId) query = { ...query, courseId: tags.courseId };
 
     const asks = await this.mongoDB.getAll(this.collection, query);
     return asks || [];
